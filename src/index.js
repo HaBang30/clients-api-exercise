@@ -1,6 +1,7 @@
 import './index.css';
 
-import App from './App';
+import Loading from './Loading';
+//import App from './App';
 //import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -12,7 +13,8 @@ root.render(
     {/* <BrowserRouter>
       <App />
     </BrowserRouter> */}
-    <App />
+    {/* <App /> */}
+    <Loading/>
   </React.StrictMode>
 );
 

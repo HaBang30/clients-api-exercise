@@ -128,25 +128,25 @@
 
 //  =============================  [Thực hành] Tạo và chỉnh sửa User thông qua call API bằng Axios =====================
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import AddUser from "./AddUser";
-import HomePage from "./HomePage";
-import ItemPage from "./ItemPage";
-import React from "react";
+// import AddUser from "./AddUser";
+// import HomePage from "./HomePage";
+// import ItemPage from "./ItemPage";
+// import React from "react";
 
-const App=()=> {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />}/>
-        <Route path="/user/:id" element={<ItemPage/>}/>
-        <Route path="/user/add" element={<AddUser/>} />
-      </Routes>
-    </BrowserRouter>
-  )
-}
-export default App;
+// const App=()=> {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<HomePage />}/>
+//         <Route path="/user/:id" element={<ItemPage/>}/>
+//         <Route path="/user/add" element={<AddUser/>} />
+//       </Routes>
+//     </BrowserRouter>
+//   )
+// }
+// export default App;
 
 //  ==================== [Thực hành] Tạo và chỉnh sửa User thông qua call API bằng Axios (CODEGYM)==============
 // import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -274,6 +274,111 @@ export default App;
 // export default App;
 
 //=============================== GET IT FROM CHAT GPT ======================
+
+// import React, { useEffect, useState } from 'react';
+
+// function fetchData() {
+//   return new Promise((resolve, reject) => {
+//     // Simulate an asynchronous operation (e.g., fetching data from an API)
+//     setTimeout(() => {
+//       const success = Math.random() < 0.5; // Simulate success/failure randomly
+//       if (success) {
+//         resolve('Data fetched successfully!');
+//       } else {
+//         reject('Failed to fetch data');
+//       }
+//     }, 4000); // Simulate a 2-second delay
+//   });
+// }
+
+// function App() {
+//   const [data, setData] = useState(null);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     fetchData()
+//       .then((result) => {
+//         setData(result);
+//       })
+//       .catch((error) => {
+//         setError(error);
+//       });
+//   }, []); // Run only once on component mount
+
+//   return (
+//     <div>
+//       {error ? (
+//         <p>Error: {error}</p>
+//       ) : (
+//         <p>{data ? data : 'Loading...'}</p>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// ==================
+import React, { Component } from "react";
+
+import axios from "axios";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      loading: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    this.getUsers()
+      .then(res => {
+        this.setState({ users: res.data });
+      })
+      .catch(err => {
+        throw err;
+      })
+      .finally(() => {
+        this.setState({ loading: false });
+      });
+  }
+
+  getUsers = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        axios
+          .get("http://localhost:3001/api/users")
+          .then(res => {
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      }, 3000);
+    });
+  };
+
+  render() {
+    const { loading, users } = this.state;
+    if (loading) return <p>loading...</p>;
+    return (
+      <div>
+        <h1>Users</h1>
+        <ul>
+          {users.map(user => (
+            <li key={user.id}> {user.name} </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
+
+export default App;
+
 
 
 
