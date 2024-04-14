@@ -1,6 +1,7 @@
 import './index.css';
 
-import Loading from './Loading';
+import Practice6 from './Practice6';
+//import Loading from './Loading';
 //import App from './App';
 //import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
@@ -14,7 +15,8 @@ root.render(
       <App />
     </BrowserRouter> */}
     {/* <App /> */}
-    <Loading/>
+    {/* <Loading/> */}
+    <Practice6/>
   </React.StrictMode>
 );
 
